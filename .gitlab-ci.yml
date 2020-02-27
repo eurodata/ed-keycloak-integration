@@ -10,13 +10,13 @@ before_script:
 Build:
   stage: Build
   script:
-    - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml org.codehaus.mojo:versions-maven-plugin:2.7:set -DnewVersion=$VERSION
+    - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml org.codehaus.mojo:versions-maven-plugin:2.7:set -DprocessAllModules=true -DnewVersion=$VERSION
     - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml clean install
 
 Deploy:
   stage: Deploy
   script:
-    - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml org.codehaus.mojo:versions-maven-plugin:2.7:set -DnewVersion=$VERSION
+    - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml org.codehaus.mojo:versions-maven-plugin:2.7:set -DprocessAllModules=true -DnewVersion=$VERSION
     - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml clean deploy
   only:
     - /^release-.*$/
