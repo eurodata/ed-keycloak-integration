@@ -5,7 +5,7 @@ stages:
   - Deploy
 
 before_script:
-  - export VERSION=`git describe origin/$CI_COMMIT_REF_NAME`
+  - export VERSION=`git describe`
 
 Build:
   stage: Build
