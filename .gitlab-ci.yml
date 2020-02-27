@@ -4,19 +4,18 @@ stages:
   - Build
   - Deploy
 
-before_script:
-  - export VERSION=`git describe --tags origin/$CI_COMMIT_REF_NAME`
-
 Build:
   stage: Build
   script:
-    - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml versions:set -DprocessAllModules=true -DnewVersion=$VERSION
+    - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml versions:set -DprocessAllModules=true -DnewVersion=$CI_COMMIT_REF_NAME
     - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml clean install
+  except:
+    - tags
 
 Deploy:
   stage: Deploy
   script:
-    - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml versions:set -DprocessAllModules=true -DnewVersion=$VERSION
+    - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml versions:set -DprocessAllModules=true -DnewVersion=$CI_COMMIT_REF_NAME
     - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml clean deploy
   only:
     - tags
