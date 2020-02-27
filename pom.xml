@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.eurodata.keycloak</groupId>
+    <artifactId>parent</artifactId>
+    <version>dev-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>ed-keycloak-integration</name>
+
+    <repositories>
+        <repository>
+            <id>eurodata</id>
+            <name>eurodata maven nexus</name>
+            <url>https://artifacts.eurodata.de/repository/eurodata-maven/</url>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>eurodata</id>
+            <url>https://artifacts.eurodata.de/repository/eurodata-maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>eurodata</id>
+            <url>https://artifacts.eurodata.de/repository/eurodata-maven-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven-surefire-version>3.0.0-M4</maven-surefire-version>
+        <maven-failsafe-version>3.0.0-M4</maven-failsafe-version>
+        <maven-compiler-version>3.8.1</maven-compiler-version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <ed-keycloak-version>6.0.0</ed-keycloak-version>
+        <java.version>1.8</java.version>
+    </properties>
+    
+    <licenses>
+        <license>
+            <name>EURODATA</name>
+            <url>file://licenseheader.txt</url>
+        </license>        
+    </licenses>
+
+    <inceptionYear>2019</inceptionYear>
+    <organization>
+        <name>Eurodata AG</name>
+        <url>https://www.eurodata.de</url>
+    </organization>
+
+    <developers>       
+        <developer>
+            <id>cbuerckert</id>
+            <name>Christian Buerckert</name>
+            <organization>EURODATA AG</organization>
+            <organizationUrl>http://www.eurodata.de</organizationUrl>
+            <timezone>+1</timezone>
+            <roles>
+                <role>Software Engineer</role>
+            </roles>
+        </developer>
+    </developers>  
+
+    <modules>
+        <module>ed-keycloak-boot-starter</module>
+		<module>ed-keycloak-util</module>
+    </modules>
+</project>

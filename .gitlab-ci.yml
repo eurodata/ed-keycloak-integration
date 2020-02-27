@@ -1,0 +1,24 @@
+image: maven:3.5.3-jdk-8
+
+stages:
+  - Build
+  - Deploy
+
+before_script:
+  - export VERSION=`git describe origin/$CI_COMMIT_REF_NAME`
+
+Build:
+  stage: Build
+  script:
+    - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml version:set -DnewVersion=$VERSION
+    - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml clean install
+
+Deploy:
+  stage: Deploy
+  script:
+    - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml version:set -DnewVersion=$VERSION
+    - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml clean deploy
+  only:
+    - /^release-.*$/
+
+
