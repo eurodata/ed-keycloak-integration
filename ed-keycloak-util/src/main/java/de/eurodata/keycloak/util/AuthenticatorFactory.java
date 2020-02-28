@@ -44,14 +44,14 @@ public class AuthenticatorFactory {
         };
     }
 
-    private KeycloakAuthenticator ss(Supplier<KeycloakServerConfiguration> config, String clientSecret) {
+    private KeycloakAuthenticator ss(Supplier<KeycloakServerConfiguration> config, String clientId, String clientSecret) {
         return new KeycloakAuthenticator(config, proxy) {
             @Override
             protected Header[] getHeaders(KeycloakServerConfiguration currentConfig) {
                 return new Header[]{
                         new Header(HEADER_GRANT_TYPE, HEADER_VALUE_CLIENT_CREDENTIALS),
                         new Header(HEADER_CLIENT_SECRET, clientSecret),
-                        new Header(HEADER_CLIENT_ID, currentConfig.getClientId())
+                        new Header(HEADER_CLIENT_ID, clientId)
                 };
             }
         };
@@ -62,16 +62,16 @@ public class AuthenticatorFactory {
         return cs(KeycloakServerConfiguration.createResolver(configUrl, proxy), username, password);
     }
 
-    public KeycloakAuthenticator createClientSecret(String configUrl, String clientSecret) {
-        return ss(KeycloakServerConfiguration.createResolver(configUrl, proxy), clientSecret);
+    public KeycloakAuthenticator createClientSecret(String configUrl, String clientId, String clientSecret) {
+        return ss(KeycloakServerConfiguration.createResolver(configUrl, proxy), clientId, clientSecret);
     }
 
     public KeycloakAuthenticator createUserPassword(Supplier<String> configUrlSupplier, String username, String password) {
         return cs(KeycloakServerConfiguration.createDynamicResolver(configUrlSupplier, proxy), username, password);
     }
 
-    public KeycloakAuthenticator createClientSecret(Supplier<String> configUrlSupplier, String clientSecret) {
-        return ss(KeycloakServerConfiguration.createDynamicResolver(configUrlSupplier, proxy), clientSecret);
+    public KeycloakAuthenticator createClientSecret(Supplier<String> configUrlSupplier, String clientId, String clientSecret) {
+        return ss(KeycloakServerConfiguration.createDynamicResolver(configUrlSupplier, proxy), clientId, clientSecret);
     }
 
     public KeycloakAuthenticator createUserPassword(String authUrl, String realm, String clientId, String username, String password) {
@@ -79,7 +79,7 @@ public class AuthenticatorFactory {
     }
 
     public KeycloakAuthenticator createClientSecret(String authUrl, String realm, String clientId, String clientSecret) {
-        return ss(KeycloakServerConfiguration.createStatic(authUrl, realm, clientId), clientSecret);
+        return ss(KeycloakServerConfiguration.createStatic(authUrl, realm, clientId), clientId, clientSecret);
     }
 
 }
