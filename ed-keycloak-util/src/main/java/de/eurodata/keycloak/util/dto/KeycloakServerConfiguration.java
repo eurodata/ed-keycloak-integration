@@ -73,8 +73,8 @@ public class KeycloakServerConfiguration {
         return createDynamicResolver(() -> url, proxy);
     }
 
-    private static HttpsURLConnection createConnection(String serverBaseUrl, Proxy proxy) throws IOException {
-        URL url = new URL(serverBaseUrl + "/api/keycloak/keycloak-client-config");
+    private static HttpsURLConnection createConnection(String configUrl, Proxy proxy) throws IOException {
+        URL url = new URL(configUrl);
         HttpsURLConnection con = (HttpsURLConnection) url.openConnection(proxy);
         con.setRequestMethod("GET");
         con.setRequestProperty("Accept", "application/json");
