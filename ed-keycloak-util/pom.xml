@@ -5,10 +5,10 @@
     <parent>
         <groupId>de.eurodata.keycloak</groupId>
         <artifactId>parent</artifactId>
-        <version>dev-SNAPSHOT</version>
+        <version>0.2-SNAPSHOT</version>
     </parent>
     <artifactId>ed-keycloak-util</artifactId>
-    <version>dev-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>

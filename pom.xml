@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.eurodata.keycloak</groupId>
     <artifactId>parent</artifactId>
-    <version>dev-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>ed-keycloak-integration</name>
 
