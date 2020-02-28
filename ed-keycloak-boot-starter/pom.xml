@@ -33,19 +33,19 @@
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-spring-security-adapter</artifactId>
-            <version>[${ed-keycloak-version},)</version>
+            <version>${ed-keycloak-version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-spring-boot-adapter-core</artifactId>
-            <version>[${ed-keycloak-version},)</version>
+            <version>${ed-keycloak-version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-spring-boot-starter</artifactId>
-            <version>[${ed-keycloak-version},)</version>
+            <version>${ed-keycloak-version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
