@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.eurodata.keycloak</groupId>
     <artifactId>parent</artifactId>
@@ -7,25 +8,6 @@
     <packaging>pom</packaging>
     <name>ed-keycloak-integration</name>
 
-    <repositories>
-        <repository>
-            <id>eurodata</id>
-            <name>eurodata maven nexus</name>
-            <url>https://artifacts.eurodata.de/repository/eurodata-maven/</url>
-        </repository>
-    </repositories>
-
-    <distributionManagement>
-        <repository>
-            <id>eurodata</id>
-            <url>https://artifacts.eurodata.de/repository/eurodata-maven-releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>eurodata</id>
-            <url>https://artifacts.eurodata.de/repository/eurodata-maven-snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
-    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -37,13 +19,7 @@
         <ed-keycloak-version>6.0.0</ed-keycloak-version>
         <java.version>1.8</java.version>
     </properties>
-    
-    <licenses>
-        <license>
-            <name>EURODATA</name>
-            <url>file://licenseheader.txt</url>
-        </license>        
-    </licenses>
+
 
     <inceptionYear>2019</inceptionYear>
     <organization>
@@ -51,7 +27,7 @@
         <url>https://www.eurodata.de</url>
     </organization>
 
-    <developers>       
+    <developers>
         <developer>
             <id>cbuerckert</id>
             <name>Christian Buerckert</name>
@@ -62,10 +38,62 @@
                 <role>Software Engineer</role>
             </roles>
         </developer>
-    </developers>  
+    </developers>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <!-- JDK-8212233 : javadoc fails on jdk12 with "The code being documented uses modules but the packages defined in $URL are in the unnamed module."-->
+                    <!-- Solution: If the project uses source/target 8, adding <source>8</source> in javadoc configuration should make the project buildable on jdk {11, 12, 13}:-->
+                    <!-- https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8212233-->
+                    <source>8</source>
+                    <doclint>none</doclint>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
     <modules>
         <module>ed-keycloak-boot-starter</module>
-		<module>ed-keycloak-util</module>
+        <module>ed-keycloak-util</module>
     </modules>
 </project>

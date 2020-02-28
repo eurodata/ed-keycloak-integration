@@ -4,11 +4,14 @@ stages:
   - Build
   - Deploy
 
+before_script:
+  - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.eurodata.de/support/gitlab-ci-support.git support
+  - cp support/artifacts-maven-settings.xml maven-settings.xml
+
 Build:
   stage: Build
   script:
-    - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml versions:set -DprocessAllModules=true -DnewVersion=$CI_COMMIT_REF_NAME
-    - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml clean install
+    - mvn -s ${CI_PROJECT_DIR}/maven-settings.xml clean deploy
   except:
     - tags
 
