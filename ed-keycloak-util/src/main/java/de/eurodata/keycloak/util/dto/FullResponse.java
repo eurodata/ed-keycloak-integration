@@ -6,6 +6,7 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ public class FullResponse {
     private String content;
 
 
-    public static FullResponse get(HttpsURLConnection connection) throws IOException {
+    public static FullResponse get(HttpURLConnection connection) throws IOException {
         // getResponseCode, connect, getInputStream or getOutputStream executes the request
         FullResponse response = new FullResponse();
         response.setStatus(connection.getResponseCode());

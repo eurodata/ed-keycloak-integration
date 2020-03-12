@@ -8,8 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.Proxy;
 import java.net.SocketTimeoutException;
 import java.net.URL;
@@ -40,7 +40,7 @@ public class KeycloakServerConfiguration {
             int tries = 0;
             while (true) {
                 try {
-                    HttpsURLConnection con = createConnection(url.get(), proxy);
+                    HttpURLConnection con = createConnection(url.get(), proxy);
                     response = FullResponse.get(con);
                     con.disconnect();
                     break;
@@ -73,9 +73,9 @@ public class KeycloakServerConfiguration {
         return createDynamicResolver(() -> url, proxy);
     }
 
-    private static HttpsURLConnection createConnection(String configUrl, Proxy proxy) throws IOException {
+    private static HttpURLConnection createConnection(String configUrl, Proxy proxy) throws IOException {
         URL url = new URL(configUrl);
-        HttpsURLConnection con = (HttpsURLConnection) url.openConnection(proxy);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection(proxy);
         con.setRequestMethod("GET");
         con.setRequestProperty("Accept", "application/json");
         con.setInstanceFollowRedirects(true);
