@@ -40,7 +40,14 @@ public class KeycloakServerConfiguration {
             int tries = 0;
             while (true) {
                 try {
-                    HttpURLConnection con = createConnection(url.get(), proxy);
+                    String urlStr = url.get();
+                    if (Thread.currentThread().isInterrupted()){
+                        throw new AuthenticatorException("Dynamic resolver has been interrupted.");
+                    }
+                    if (urlStr == null) {
+                        throw new AuthenticatorException("URL supplier return null.");
+                    }
+                    HttpURLConnection con = createConnection(urlStr, proxy);
                     response = FullResponse.get(con);
                     con.disconnect();
                     break;

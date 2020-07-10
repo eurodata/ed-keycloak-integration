@@ -68,7 +68,7 @@ public abstract class KeycloakAuthenticator implements Authenticator {
                 log.warn("Keycloak Verification failed. Retry {}/{}", i, verificationRetry, ve);
             }
         }
-        throw new AuthenticatorException("Could not retreive keycloak token.");
+        throw new AuthenticatorException("Could not retrieve keycloak token.");
     }
 
     private int getActiveSeconds() {
